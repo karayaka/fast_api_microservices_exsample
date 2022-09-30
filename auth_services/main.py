@@ -47,7 +47,13 @@ def login(request:OAuth2PasswordRequestForm=Depends()):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"Hatalı Şifre")
     else:
-        access_token = create_access_token(data={"sub": user["name"]})
+        #kullanıcıya ait bilgileri hashleniyor
+        access_token = create_access_token(data={
+            "email": user["email"],
+            "name":user["name"],
+            "surname":user["surname"],
+            "id":str(user["_id"])
+            })
         return {"access_token": access_token, "token_type": "bearer"}
         
         

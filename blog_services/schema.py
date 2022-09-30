@@ -27,9 +27,15 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Union[str, None] = None
+    id: Union[str, None] = None
+    name:Union[str, None] = None
+    surname:Union[str, None] = None
 
 class User(BaseModel):
     name:str
     surname:str
     email:str
     password:str
+
+class CommentCountMessage(BaseModel):
+    commetn_count:int

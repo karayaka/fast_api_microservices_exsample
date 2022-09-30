@@ -9,11 +9,16 @@ import models
 from database import engine,SesionLocal
 from sqlalchemy.orm import Session
 from aut2Hadler import get_current_user
+import asyncio
+from message_broker_handler import commet_count_consume
 
 
 models.Base.metadata.create_all(engine)
 
 app =FastAPI()
+
+asyncio.create_task(commet_count_consume())
+
 
 def get_db():
     db=SesionLocal()
